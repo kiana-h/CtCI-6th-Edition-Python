@@ -2,28 +2,37 @@
 import unittest
 from copy import deepcopy
 
-
 def rotate_matrix(matrix):
-    """rotates a matrix 90 degrees clockwise"""
-    n = len(matrix)
-    for layer in range(n // 2):
-        first, last = layer, n - layer - 1
-        for i in range(first, last):
-            # save top
-            top = matrix[layer][i]
+    for i in range(len(matrix)):
+        for j in range(i,len(matrix[0])):
+           matrix[i][j] , matrix[j][i] = matrix[j][i] , matrix[i][j]
 
-            # left -> top
-            matrix[layer][i] = matrix[-i - 1][layer]
+    for row in matrix:
+        row.reverse()
 
-            # bottom -> left
-            matrix[-i - 1][layer] = matrix[-layer - 1][-i - 1]
-
-            # right -> bottom
-            matrix[-layer - 1][-i - 1] = matrix[i][-layer - 1]
-
-            # top -> right
-            matrix[i][-layer - 1] = top
     return matrix
+    
+# def rotate_matrix(matrix):
+    """rotates a matrix 90 degrees clockwise"""
+    # n = len(matrix)
+    # for layer in range(n // 2):
+    #     first, last = layer, n - layer - 1
+    #     for i in range(first, last):
+    #         # save top
+    #         top = matrix[layer][i]
+
+    #         # left -> top
+    #         matrix[layer][i] = matrix[-i - 1][layer]
+
+    #         # bottom -> left
+    #         matrix[-i - 1][layer] = matrix[-layer - 1][-i - 1]
+
+    #         # right -> bottom
+    #         matrix[-layer - 1][-i - 1] = matrix[i][-layer - 1]
+
+    #         # top -> right
+    #         matrix[i][-layer - 1] = top
+    # return matrix
 
 
 def rotate_matrix_pythonic(matrix):

@@ -1,23 +1,60 @@
 import time
 import unittest
 
-
 def compress_string(string):
-    compressed = []
-    counter = 0
+    chars = list(string)
+    if not chars:
+        return 0
+        
+    prev = chars[0]
+    counter = 1
+    
+    write = 0
+    
+    for i in range(1,len(chars)):
+        curr = chars[i]
+        
+        if curr == prev:
+            counter += 1
+        
+        else:
+            chars[write] = prev
+            write += 1
+            if counter > 1:
+                for char in list(str(counter)):
+                    chars[write] = char
+                    write += 1
+            counter = 1
+        prev = curr
+        
+    chars[write] = prev
+    write += 1
 
-    for i in range(len(string)):  # noqa
-        if i != 0 and string[i] != string[i - 1]:
-            compressed.append(string[i - 1] + str(counter))
-            counter = 0
-        counter += 1
+    if counter > 1:
+        for char in list(str(counter)):
+            chars[write] = char
+            write += 1
+        
+    
+    return "".join(chars[:write])
+        
 
-    # add last repeated character
-    if counter:
-        compressed.append(string[-1] + str(counter))
+# def compress_string(string):
+#     compressed = []
+#     counter = 0
 
-    # returns original string if compressed string isn't smaller
-    return min(string, "".join(compressed), key=len)
+#     for i in range(len(string)):  # noqa
+#         if i != 0 and string[i] != string[i - 1]:
+#             compressed.append(string[i - 1] + str(counter))
+#             counter = 0
+#         counter += 1
+
+#     # add last repeated character
+#     if counter:
+#         compressed.append(string[-1] + str(counter))
+
+#     # returns original string if compressed string isn't smaller
+#     return min(string, "".join(compressed), key=len)
 
 
 class Test(unittest.TestCase):

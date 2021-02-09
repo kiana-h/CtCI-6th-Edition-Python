@@ -2,25 +2,43 @@
 import unittest
 from copy import deepcopy
 
-
 def zero_matrix(matrix):
-    m = len(matrix)
-    n = len(matrix[0])
-    rows = set()
-    cols = set()
+    rows = len(matrix)
+    cols = len(matrix[0])
+    remove_rows = set()
+    remove_cols = set()
 
-    for x in range(m):
-        for y in range(n):
-            if matrix[x][y] == 0:
-                rows.add(x)
-                cols.add(y)
-
-    for x in range(m):
-        for y in range(n):
-            if (x in rows) or (y in cols):
-                matrix[x][y] = 0
+    for row in range(rows):
+        for col in range(cols):
+            if matrix[row][col] == 0:
+                remove_rows.add(row)
+                remove_cols.add(col)
+    
+    for row in range(rows):
+        for col in range(cols):
+            if row in remove_rows or col in remove_cols:
+                matrix[row][col] = 0
 
     return matrix
+
+# def zero_matrix(matrix):
+#     m = len(matrix)
+#     n = len(matrix[0])
+#     rows = set()
+#     cols = set()
+
+#     for x in range(m):
+#         for y in range(n):
+#             if matrix[x][y] == 0:
+#                 rows.add(x)
+#                 cols.add(y)
+
+#     for x in range(m):
+#         for y in range(n):
+#             if (x in rows) or (y in cols):
+#                 matrix[x][y] = 0
+
+    # return matrix
 
 
 def zero_matrix_pythonic(matrix):
